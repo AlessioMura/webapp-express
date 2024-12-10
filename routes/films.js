@@ -14,6 +14,26 @@ router.get('/', (req, res) => {
 })
 
 
+router.get('/:id', (req, res) => {
+
+    const id = req.params.id
+    const sql = `SELECT * FROM movies WHERE id = ?`
+
+
+    connection.query(sql, [id], (err, results) => {
+        if (err) return res.serverStatus(500).json({ err: err })
+
+        res.json({
+            films: results[0]
+        })
+    })
+
+
+
+
+})
+
+
 
 
 module.exports = router
